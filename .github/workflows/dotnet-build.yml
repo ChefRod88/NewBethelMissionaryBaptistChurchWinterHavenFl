@@ -1,0 +1,30 @@
+# Builds the web app with an explicit .csproj path so the SDK never hits MSB1011
+# (multiple .sln/.csproj in the repo root). Adjust branches as needed.
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          # ChurchWebsite = net9.0; tests = net10.0
+          dotnet-version: |
+            9.0.x
+            10.0.x
+
+      - name: Build Release
+        run: dotnet build ChurchWebsite.csproj --configuration Release
+
+      - name: Test
+        run: dotnet test ChurchWebsite.Tests/ChurchWebsite.Tests.csproj --configuration Release
