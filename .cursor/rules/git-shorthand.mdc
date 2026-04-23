@@ -1,0 +1,27 @@
+---
+description: Git letter shorthands (a, c, p, acp) for add, commit, push
+alwaysApply: true
+---
+
+# Git shorthands
+
+When the user’s **primary** instruction uses these tokens (or they say them explicitly in a version-control / “ship it” context), **execute the matching Git action** via the terminal. Do not treat random words containing these letters as commands.
+
+| User says | Agent action |
+|-----------|----------------|
+| **`a`** | **`git add`**: stage the files changed in the current task, or all modified/tracked files if the scope is “everything” (`git add -A` or explicit paths as appropriate). |
+| **`c`** | **`git commit`**: run `git commit` with a clear message; if the user did not provide one, infer a concise conventional message from the diff / conversation. |
+| **`p`** | **`git push`**: `git push` to the current branch’s upstream (typically `git push origin <branch>`). |
+| **`acp`** | **All three in order:** `git add` (same rules as `a`) → `git commit` (same as `c`) → `git push` (same as `p`), unless the user says otherwise. |
+
+**Notes**
+
+- If there is **nothing to commit**, say so and do not push an empty commit.
+- Prefer **`git add -A` or `git add .` from the repo root** when the user means “add all my changes for this request,” unless they list paths.
+- If the tool environment blocks `git` writes or the network, request the permissions needed to commit and push.
+
+**Examples**
+
+- “**acp**” after finishing work → add all relevant changes, commit with a good message, push.
+- “**a**” then “**c** my message: fix hero” → add, then commit with that message.
+- “**p**” alone → push (after confirming there is something to push or a recent local commit exists).
