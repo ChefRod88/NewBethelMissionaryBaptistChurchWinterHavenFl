@@ -19,17 +19,8 @@ window.addEventListener('scroll', () => {
   const wrap = document.getElementById('heroBgWrap');
   if (!heroVid) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (typeof window.skipHeavyHeroVideo === 'function' && window.skipHeavyHeroVideo()) {
     heroVid.pause();
-    heroVid.querySelectorAll('source').forEach(function (s) { s.remove(); });
-    heroVid.removeAttribute('src');
-    heroVid.load();
-    if (wrap) wrap.classList.add('hero-bg-fallback');
-    return;
-  }
-
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (conn && (conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g')) {
     heroVid.querySelectorAll('source').forEach(function (s) { s.remove(); });
     heroVid.removeAttribute('src');
     heroVid.load();

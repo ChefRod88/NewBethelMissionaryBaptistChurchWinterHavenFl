@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
   const wrap = document.getElementById('aboutHeroBg');
   const v = document.querySelector('.about-hero-video');
   if (!wrap || !v) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (typeof window.skipHeavyHeroVideo === 'function' && window.skipHeavyHeroVideo()) {
     v.pause();
     v.removeAttribute('src');
     v.load();

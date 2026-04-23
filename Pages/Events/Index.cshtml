@@ -16,11 +16,12 @@
     <video
       class="ev-hero-video"
       src='@Url.Content("~/videos/thanks.mp4")'
+      poster='@Url.Content("~/images/IMG_7706.jpg")'
       autoplay
       muted
       loop
       playsinline
-      preload="auto"
+      preload="metadata"
       aria-hidden="true"></video>
   </div>
 </div>
@@ -49,5 +50,6 @@
 </div><!-- end white-lift -->
 
 @section Scripts {
+<script src="~/js/hero-video-env.js" asp-append-version="true"></script>
 <script src="~/js/pages/events-index.js" asp-append-version="true"></script>
 }
