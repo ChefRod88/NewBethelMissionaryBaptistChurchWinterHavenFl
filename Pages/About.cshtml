@@ -5,6 +5,7 @@
 }
 @section Head {
 <meta name="description" content="Learn about New Bethel Missionary Baptist Church — our story, our leadership, and our mission to the Winter Haven community.">
+<link rel="preload" as="video" type="video/mp4" href="~/videos/bannerflow.mp4" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
 }
 
@@ -15,12 +16,11 @@
       <video
         class="about-hero-video"
         src='@Url.Content("~/videos/bannerflow.mp4")'
-        poster='@Url.Content("~/images/IMG_7706.jpg")'
         autoplay
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"></video>
       <div class="about-hero-overlay" aria-hidden="true"></div>
     </div>

@@ -1,6 +1,6 @@
 /**
  * When true, skip large autoplaying hero MP4s: reduced motion, Data Saver, or 2G.
- * Use with CSS fallbacks (gradient) / poster. Load before page-specific hero script.
+ * Use with CSS fallbacks (gradient). Load before page-specific hero script.
  */
 window.skipHeavyHeroVideo = function skipHeavyHeroVideo() {
   try {
