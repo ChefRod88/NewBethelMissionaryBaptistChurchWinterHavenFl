@@ -356,20 +356,6 @@
       letter-spacing: 0.1em;
     }
   
-    /* ── GROUPS PAGE ── */
-    /* Groups cards: 1 column, full width */
-    .groups-page .col-md-6,
-    .groups-page .col-lg-4 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  
-    .groups-page .card .btn.btn-sm {
-      min-height: 40px;
-      font-size: 0.8rem;
-      padding: 0.5rem 1rem;
-    }
-  
     /* ── ABOUT PAGE (Canva embed) ── */
     /* Give it full screen on phone */
     div[style*="calc(100vh - 64px)"] {
@@ -394,7 +380,7 @@
       line-height: 1.5;
     }
   
-    /* ── GENERIC CARDS (Events, Sermons, Groups) ── */
+    /* ── GENERIC CARDS (e.g. Events) ── */
     .card {
       border-radius: 12px;
     }

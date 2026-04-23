@@ -766,11 +766,6 @@ body.home-page .navbar.navbar-transparent .nav-link.dropdown-toggle:hover {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
 }
-.groups-page .card .btn.btn-sm {
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  white-space: nowrap;
-}
 
 /* Badge */
 .badge.bg-light {

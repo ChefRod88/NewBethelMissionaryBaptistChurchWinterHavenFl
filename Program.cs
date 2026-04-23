@@ -14,7 +14,6 @@ builder.Services.AddRazorPages();                                    // Enables 
 builder.Services.AddHttpContextAccessor();                           // Needed for _Layout to read current path
 builder.Services.Configure<ChurchSettings>(builder.Configuration.GetSection(ChurchSettings.SectionName));  // Binds appsettings Church section
 builder.Services.AddScoped<IEventService, EventService>();           // In-memory events; inject in Events pages
-builder.Services.AddScoped<IGroupService, GroupService>();           // In-memory groups; inject in Groups pages
 
 var app = builder.Build();
 
