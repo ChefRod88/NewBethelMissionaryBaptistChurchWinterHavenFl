@@ -1,7 +1,13 @@
 @page
+@using ChurchWebsite.Models
+@using Microsoft.Extensions.Options
+@inject IOptions<ChurchSettings> ChurchOptions
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Jesus";
+    var church = ChurchOptions.Value;
+    var watchIsExternal = !string.IsNullOrWhiteSpace(church.SocialMedia.YouTube);
+    var watchUrl = watchIsExternal ? church.SocialMedia.YouTube! : "#";
 }
 
 @section Head {
@@ -177,7 +183,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 }
 .faq-body-inner p + p { margin-top: 14px; }
 
-/* ── JOIN CARDS ── */
+/* ── TAKE A NEXT STEP — same destinations as header: Events, Watch ── */
 .jesus-join-wrap {
   background: var(--bg);
   padding: 80px 0 140px;
@@ -189,58 +195,57 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   color: var(--black); margin-bottom: 50px;
 }
 .jesus-join-heading strong { font-style: normal; }
-.jesus-cards-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 25px;
+.jesus-next-nav {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 16px;
+  max-width: 720px;
 }
-.jesus-card {
-  border-radius: 20px; overflow: hidden;
-  display: flex; flex-direction: column;
+.jesus-next-link {
+  display: flex; align-items: center; gap: 20px;
+  padding: 22px 24px 22px 20px;
+  border-radius: 20px; text-decoration: none; color: inherit;
   background: var(--white);
   box-shadow: 0 0 8px -4px rgba(0,0,0,0.35);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
-.jesus-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px -8px rgba(0,0,0,0.25); }
-.jesus-card-img {
-  aspect-ratio: 1.6; overflow: hidden; background: #ddd;
-  position: relative;
+.jesus-next-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px -12px rgba(0,0,0,0.3);
+  border-color: rgba(42, 150, 125, 0.35);
 }
-.jesus-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.jesus-card-img-ph {
-  width: 100%; height: 100%; min-height: 180px;
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(0,0,0,0.2); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+.jesus-next-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
-.jesus-card-body {
-  padding: 28px 28px 32px;
-  display: flex; flex-direction: column; gap: 12px; flex: 1;
-}
-.jesus-card-label {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+.jesus-next-icon {
+  width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px;
+  background: rgba(42, 150, 125, 0.12);
   color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
 }
-.jesus-card-title {
+.jesus-next-icon svg { display: block; }
+.jesus-next-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.jesus-next-title {
   font-family: 'Judson', serif;
-  font-size: clamp(22px, 2.5vw, 36px);
-  letter-spacing: -0.03em; line-height: 1em;
+  font-size: clamp(20px, 2.2vw, 32px);
+  letter-spacing: -0.03em; line-height: 1.1;
   color: var(--black);
 }
-.jesus-card-desc {
-  font-size: clamp(14px, 1.3vw, 16px);
-  letter-spacing: -0.01em; line-height: 1.5em;
-  color: var(--gray-dark); flex: 1;
+.jesus-next-sub {
+  font-family: 'Outfit', sans-serif; font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 400; letter-spacing: -0.01em; line-height: 1.45;
+  color: var(--gray-dark);
 }
-.jesus-card-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--black); text-decoration: none;
-  margin-top: 8px;
-  position: relative; padding-bottom: 3px; width: fit-content;
+.jesus-next-nav-hint {
+  display: block; margin-top: 2px;
+  font-size: 12px; letter-spacing: 0.02em; color: var(--gray);
 }
-.jesus-card-link::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 100%;
-  height: 1px; background: var(--black); transition: right 0.3s ease;
+.jesus-next-chevron {
+  flex-shrink: 0; color: var(--black); opacity: 0.45;
+  transition: transform 0.2s, opacity 0.2s;
 }
-.jesus-card-link:hover::after { right: 0; }
+.jesus-next-link:hover .jesus-next-chevron { transform: translateX(4px); opacity: 0.9; }
 
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -252,7 +257,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 @@media (max-width: 900px) {
   .section-inner { padding: 0 25px; }
   .jesus-intro-row { flex-direction: column; gap: 30px; }
-  .jesus-cards-row { grid-template-columns: 1fr; }
 }
 @@media (max-width: 600px) {
   .white-lift { border-radius: 30px 30px 0 0; }
@@ -400,43 +404,44 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 
 </div><!-- end white-lift -->
 
-<!-- JOIN US CARDS -->
+<!-- TAKE A NEXT STEP — same targets as header nav: Events, Watch -->
 <div class="jesus-join-wrap">
   <div class="section-inner">
     <h2 class="jesus-join-heading reveal"><strong>Take a next step.</strong></h2>
-    <div class="jesus-cards-row">
-
-      <a href="/Events" class="jesus-card reveal" style="text-decoration:none; color:inherit;">
-        <div class="jesus-card-img">
-          <div class="jesus-card-img-ph">Add photo</div>
-        </div>
-        <div class="jesus-card-body">
-          <span class="jesus-card-label">In person</span>
-          <h3 class="jesus-card-title">Upcoming Events</h3>
-          <p class="jesus-card-desc">Join us for Sunday worship or one of our community events. There's a place for you here.</p>
-          <span class="jesus-card-link">
-            See events
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
+    <p class="reveal" style="font-family:'Outfit',sans-serif; font-size: clamp(15px,1.4vw,18px); color: var(--gray-dark); max-width: 720px; margin: -32px 0 28px; line-height: 1.5;">The same quick links you’ll find in the site menu at the top of the page.</p>
+    <nav class="jesus-next-nav" aria-label="Upcoming events and online worship">
+      <a href="/Events" class="jesus-next-link reveal">
+        <span class="jesus-next-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M3 10h18M8 2v4M16 2v4"/>
+          </svg>
+        </span>
+        <span class="jesus-next-text">
+          <span class="jesus-next-title">Events</span>
+          <span class="jesus-next-sub">View upcoming services, gatherings, and what’s on the calendar at New Bethel.</span>
+          <span class="jesus-next-nav-hint">Same page as <strong>Events</strong> in the top menu</span>
+        </span>
+        <span class="jesus-next-chevron" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </span>
       </a>
-
-      <a href="https://www.youtube.com/@@NewBethelMissionaryBaptist" target="_blank" rel="noopener" class="jesus-card reveal d1" style="text-decoration:none; color:inherit;">
-        <div class="jesus-card-img">
-          <div class="jesus-card-img-ph">Add photo</div>
-        </div>
-        <div class="jesus-card-body">
-          <span class="jesus-card-label">Online</span>
-          <h3 class="jesus-card-title">Online Content</h3>
-          <p class="jesus-card-desc">Watch sermons, messages, and more on our YouTube channel. Wherever you are, you can join us.</p>
-          <span class="jesus-card-link">
-            Watch now
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
+      <a href="@watchUrl" class="jesus-next-link reveal d1" @Html.Raw(watchIsExternal ? "target=\"_blank\" rel=\"noopener noreferrer\"" : "")>
+        <span class="jesus-next-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7-11-7z"/>
+          </svg>
+        </span>
+        <span class="jesus-next-text">
+          <span class="jesus-next-title">Watch</span>
+          <span class="jesus-next-sub">Sermons, messages, and worship on our YouTube channel—wherever you are.</span>
+          <span class="jesus-next-nav-hint">Same link as <strong>Watch</strong> in the top menu</span>
+        </span>
+        <span class="jesus-next-chevron" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </span>
       </a>
-
-    </div>
+    </nav>
   </div>
 </div>
 

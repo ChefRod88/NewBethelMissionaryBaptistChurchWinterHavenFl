@@ -2,6 +2,8 @@
 
 A production-oriented **ASP.NET Core** marketing and community site for a local church in Winter Haven, Florida. The codebase prioritizes a **static-first, configuration-driven** content model, a **coherent “Edify” visual system** (Judson + Outfit, pill navigation, card lifts), and **predictable GitHub → Azure** deployment for a **single** deployable project (`ChurchWebsite.csproj`).
 
+**Status:** The public-facing **v1 site is complete** for launch—copy, photography and video blocks, leadership, giving, and footer credit are in place. Ongoing work is **operational** (content swaps, config in Azure, optional enhancements below), not a missing core.
+
 ---
 
 ## Executive summary
@@ -77,29 +79,29 @@ flowchart TB
 ### Global shell (`Pages/Shared/_Layout.cshtml`)
 
 - **Floating pill navigation** (desktop) with **active state** from current path; **mobile overlay** menu.
-- **Footer** with church name, service times, address, **Google Maps** search link derived from `FullAddress`, phone, email, social.
+- **Footer** with church name, service times, address, **Google Maps** search link derived from `FullAddress`, phone, email, social; bottom band with **copyright + socials**; **legal strip** with Privacy link, “All Rights Reserved,” and **RC//DEV** credit (`www.rodneyachery.com`).
 - **Open Graph + Twitter Card** using `ViewData["Description"]` / `["OgImage"]` when set, else church defaults.
 - **JSON-LD** `Church` schema (address, optional phone/email, YouTube `sameAs` when configured).
 
 ### Home (`/`, `Pages/Index.cshtml` + `wwwroot/css/pages/index.css`)
 
-- **Full-viewport video hero** (`motionglass.mp4`) with **poster**, word blur-in animation, and JS handling for **reduced motion**, **save-data / slow network**, and **autoplay** reliability.
-- **White “lift”** card layout for mission and content blocks; **card grid** to internal routes (e.g. Jesus, Events) with CTA.
-- **Placeholders** remain for some photography (“Add photo”, “Add congregation photo”) in markup—content completion is outstanding.
+- **Full-viewport video hero** (`motionglass.mp4`) with word blur-in and JS handling for **reduced motion**, **save-data / slow network**, and **autoplay** reliability.
+- **White “lift”** layout: story and values with **`wwwroot/images`** photography; wide ministry block; three feature columns use **looping MP4s** in cards (`jesusmotion.mp4`, `thanks.mp4`, `springmotion.mp4`) with the same “skip heavy video” policy as the hero where appropriate.
+- **CTAs** to Jesus, Events, and Give; large events strip at the bottom of the gray section.
 
 ### About (`/About`, `about.css` / `about.js`)
 
 - **Video hero** (`bannerflow.mp4`) with **overlay** and `about-hero-viewport` stacking; **reduced motion** and **error** → gradient fallback.
-- Multi-section story, leadership grids, **beliefs** grid, and **CTA** to home.
+- Story and mission with **`wwwroot/images`** assets; **leadership pyramid** (pastors and ministers) with photos; **beliefs** grid; CTA to home. Deacon board was removed by design.
 
 ### Jesus (`/Jesus`, inline styles + `jesus.css` / `jesus.js` mirror)
 
-- **Video hero** (`risencross.mp4`); same **playback and fallback** pattern as Give/About; FAQ accordion, scroll reveal, **join** cards.
-- **Placeholder** images on bottom cards.
+- **Video hero** (`risencross.mp4`); same **playback and fallback** pattern as Give/About; FAQ accordion, scroll reveal.
+- **Take a next step** uses **nav-style rows** to **`/Events`** and **Watch** (church YouTube from config)—aligned with the header, not image cards.
 
 ### Give (`/Give`, inline + shared patterns)
 
-- **Video hero** (`give.mp4`), mission copy, **Cash App** tag from config (`Church:CashAppTag`), thanks section, cards—several **“Add photo”** placeholders.
+- **Video hero** (`give.mp4`); **Cash App** from config (`Church:CashAppTag`); **three-column** giving methods with photos under `wwwroot/images/`; **thank you** block with `thankyou.jpg`.
 
 ### Live (`/Live`, `Live.cshtml` + `LiveModel`)
 
@@ -178,20 +180,19 @@ dotnet publish ChurchWebsite.csproj -c Release -o ./publish
 
 ## Testing
 
-The repository previously contained an **xUnit** project; it was **removed** to reduce maintenance surface. There is **no** automated test project in the tree as of the current `main` branch. Re-introducing **smoke or Playwright** tests for critical paths would be a natural next step for larger teams.
+There is **no** automated test project in the tree. Re-introducing **smoke** or **Playwright** tests for critical paths is optional for future maintainers.
 
 ---
 
-## Roadmap (honest, from the codebase)
+## Roadmap (optional enhancements; v1 is shipped)
 
-1. **Events list ↔ `EventService` + details:** add event cards (or a calendar) on `/Events` linking to `Events/Details`, or remove dead seed data if the TBA state is final.
-2. **Replace placeholders:** photography blocks on **Index, Jesus, Give**; **Events** TBA/placeholder copy.
-3. **Config-driven secrets:** move **GraphHopper** (and any future keys) to **Azure App settings**; rotate any key that was committed in plain JSON.
-4. **Use `Routing` settings** or remove unused config: either implement “directions to church” (client map + GraphHopper) or **delete** the unused `Routing` subtree to avoid confusion.
-5. **Auth (optional):** if an **admin** area is added, add authentication and **do not** rely on the current `UseAuthorization` no-op.
-6. **Persistence:** swap in **SQL** or headless **CMS** for events and other content if editorial frequency grows.
-7. **Performance / cost:** large **MP4** files in `wwwroot/videos` may warrant **Git LFS**, **CDN** (Azure Storage + CDN), or **re-encode** for size; GitHub warns on files **> 50 MB**.
-8. **Accessibility:** continue auditing **contrast** on video heroes, **focus** on mobile menu, and **motion** preferences across scroll effects.
+1. **Events list ↔ `EventService` + details:** surface in-memory or future CMS events on `/Events` and link to `Events/Details`, or keep TBA and trim unused seed data.
+2. **Config-driven secrets:** move **GraphHopper** (and any future keys) to **Azure App settings**; rotate any key that was committed in plain JSON.
+3. **Use `Routing` settings** or remove unused config: implement “directions to church” or **delete** the unused `Routing` subtree.
+4. **Auth (optional):** only if an **admin** area is added; do not rely on the current `UseAuthorization` no-op.
+5. **Persistence:** **SQL** or headless **CMS** for events if editorial volume grows.
+6. **Media delivery:** large **MP4** files may warrant **CDN** or re-encode; GitHub warns on files **> 50 MB**.
+7. **Accessibility:** ongoing audit of **contrast**, **focus** on mobile menu, and **reduced motion** for scroll/parallax.
 
 ---
 
@@ -201,4 +202,4 @@ Application entry comments in `Program.cs` reflect the author’s faith-oriented
 
 ---
 
-*Last reviewed against the application structure, `Program.cs`, `appsettings` binding, `Pages/`, `Services/`, and GitHub workflow definitions. Update this document when the persistence layer, auth, or deployment surface changes.*
+*Last updated to reflect a **complete v1** public site. Revise when persistence, auth, or deployment changes materially.*

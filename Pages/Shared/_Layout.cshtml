@@ -184,6 +184,21 @@
       color: rgba(255,255,255,0.4);
       width: 100%; max-width: 1440px; margin: 0 auto;
     }
+    .edify-footer-legal {
+      width: 100%; max-width: 1440px; margin: 24px auto 0;
+      padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px; letter-spacing: 0.02em;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.38);
+    }
+    .edify-footer-legal-line { margin: 0; text-transform: none; }
+    .edify-footer-legal a {
+      color: rgba(255,255,255,0.6); text-decoration: none; text-transform: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2); transition: color 0.2s, border-color 0.2s;
+    }
+    .edify-footer-legal a:hover { color: var(--edify-white); border-bottom-color: rgba(255,255,255,0.45); }
     .edify-footer-socials { display: flex; gap: 12px; }
     .edify-footer-socials a { display: flex; align-items: center; opacity: 0.8; transition: opacity 0.2s; }
     .edify-footer-socials a:hover { opacity: 1; }
@@ -297,6 +312,13 @@
                 </a>
             }
         </div>
+    </div>
+
+    <div class="edify-footer-legal">
+        <p class="edify-footer-legal-line">
+            <a href="/Privacy">Privacy Notice</a> <span aria-hidden="true">•</span> All Rights Reserved
+        </p>
+        <p class="edify-footer-legal-line">Designed by RC//DEV — <a href="https://www.rodneyachery.com" target="_blank" rel="noopener noreferrer">www.rodneyachery.com</a></p>
     </div>
 </footer>
 

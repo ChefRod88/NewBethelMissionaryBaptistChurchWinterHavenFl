@@ -56,6 +56,27 @@ window.addEventListener('scroll', () => {
   }
 })();
 
+// Card loop videos: muted autoplay; drop sources when skipping heavy video (same as hero policy)
+(function () {
+  document.querySelectorAll('.card-img-media').forEach(function (v) {
+    if (typeof window.skipHeavyHeroVideo === 'function' && window.skipHeavyHeroVideo()) {
+      v.pause();
+      v.querySelectorAll('source').forEach(function (s) { s.remove(); });
+      v.removeAttribute('src');
+      v.load();
+      v.style.display = 'none';
+      return;
+    }
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute('muted', '');
+    var play = function () { v.play().catch(function () {}); };
+    v.addEventListener('loadeddata', play, { once: true });
+    v.addEventListener('canplay', play, { once: true });
+    play();
+  });
+})();
+
 // Scroll reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
