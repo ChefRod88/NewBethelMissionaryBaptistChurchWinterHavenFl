@@ -7,4 +7,8 @@
     <UserSecretsId>churchwebsite-8f3a2c1e-9b7d-4e6f-a5d2-1c0b9e8f7a6d</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ChurchWebsite.Tests/**" />
+  </ItemGroup>
+
 </Project>

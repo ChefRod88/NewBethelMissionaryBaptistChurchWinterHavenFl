@@ -43,6 +43,8 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   text-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 .jesus-hero-title strong { font-style: normal; font-weight: 700; }
+.word { display: inline-block; opacity: 0; filter: blur(10px); transform: translateY(10px); transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease; }
+.word.show { opacity: 1; filter: blur(0); transform: translateY(0); }
 
 /* ── WHITE LIFT ── */
 .white-lift {
