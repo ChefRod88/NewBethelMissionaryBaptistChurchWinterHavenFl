@@ -167,7 +167,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 }
 .faq-body-inner p + p { margin-top: 14px; }
 
-/* ── JOIN CARDS ── */
+/* ── TAKE A NEXT STEP — same destinations as header: Events, Watch (see Jesus.cshtml for full rules) ── */
 .jesus-join-wrap {
   background: var(--bg);
   padding: 80px 0 140px;
@@ -179,58 +179,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   color: var(--black); margin-bottom: 50px;
 }
 .jesus-join-heading strong { font-style: normal; }
-.jesus-cards-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 25px;
-}
-.jesus-card {
-  border-radius: 20px; overflow: hidden;
-  display: flex; flex-direction: column;
-  background: var(--white);
-  box-shadow: 0 0 8px -4px rgba(0,0,0,0.35);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.jesus-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px -8px rgba(0,0,0,0.25); }
-.jesus-card-img {
-  aspect-ratio: 1.6; overflow: hidden; background: #ddd;
-  position: relative;
-}
-.jesus-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.jesus-card-img-ph {
-  width: 100%; height: 100%; min-height: 180px;
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(0,0,0,0.2); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-}
-.jesus-card-body {
-  padding: 28px 28px 32px;
-  display: flex; flex-direction: column; gap: 12px; flex: 1;
-}
-.jesus-card-label {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--accent);
-}
-.jesus-card-title {
-  font-family: 'Judson', serif;
-  font-size: clamp(22px, 2.5vw, 36px);
-  letter-spacing: -0.03em; line-height: 1em;
-  color: var(--black);
-}
-.jesus-card-desc {
-  font-size: clamp(14px, 1.3vw, 16px);
-  letter-spacing: -0.01em; line-height: 1.5em;
-  color: var(--gray-dark); flex: 1;
-}
-.jesus-card-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--black); text-decoration: none;
-  margin-top: 8px;
-  position: relative; padding-bottom: 3px; width: fit-content;
-}
-.jesus-card-link::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 100%;
-  height: 1px; background: var(--black); transition: right 0.3s ease;
-}
-.jesus-card-link:hover::after { right: 0; }
+/* Next-step row links: calendar + play icons; styles duplicated in page Head */
 
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -242,7 +191,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 @media (max-width: 900px) {
   .section-inner { padding: 0 25px; }
   .jesus-intro-row { flex-direction: column; gap: 30px; }
-  .jesus-cards-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .white-lift { border-radius: 30px 30px 0 0; }

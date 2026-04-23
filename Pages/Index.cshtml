@@ -43,10 +43,7 @@
         <!-- Row 1: Image + About text -->
         <div class="row reveal">
           <div class="row-img" style="aspect-ratio: 0.75;">
-            <div class="row-img-ph">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-              Add congregation photo
-            </div>
+            <img src="~/images/IMG_7706.jpg" alt="New Bethel — a church where all are welcome" width="800" height="1067" loading="lazy" asp-append-version="true" />
           </div>
           <div class="row-text">
             <h2 class="s-h2">A church where all are welcome.</h2>
@@ -70,7 +67,7 @@
             <p class="s-body"><strong>NEW BETHEL MISSIONARY BAPTIST CHURCH</strong> — A place to belong, believe, and become.</p>
           </div>
           <div class="inline-img">
-            <div class="inline-img-ph">Add photo</div>
+            <img src="~/images/IMG_7728.jpg" alt="New Bethel Missionary Baptist Church" width="800" height="550" loading="lazy" asp-append-version="true" />
           </div>
           <div class="faith-phrases">
             <h2 class="s-h2" style="line-height: 1.05;">
@@ -91,7 +88,7 @@
         <!-- Block 1: Wide image + ministry text -->
         <div class="wide-row reveal">
           <div class="wide-img">
-            <div class="wide-img-ph">Add ministry / outreach photo</div>
+            <img src="~/images/IMG_7935.jpg" alt="Ministry, Bible teaching, and online content" width="1000" height="615" loading="lazy" asp-append-version="true" />
           </div>
           <div class="wide-text">
             <h3 class="s-h3"><strong>IN THE ROOM, IN THE CITY + IN THE WORLD.</strong></h3>
@@ -111,7 +108,9 @@
           <!-- Card 1: Who Jesus Is -->
           <div class="card-col reveal">
             <div class="card-img">
-              <div class="card-img-ph">Add photo</div>
+              <video class="card-img-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="@Url.Content("~/videos/jesusmotion.mp4")" type="video/mp4" />
+              </video>
             </div>
             <h3 class="s-h3">Who Jesus is.</h3>
             <p class="s-body">Discover who Jesus is, what He taught, and how His love continues to transform lives, guiding us toward hope, purpose, and faith every day.</p>
@@ -126,7 +125,9 @@
           <!-- Card 2: Events -->
           <div class="card-col reveal d1">
             <div class="card-img">
-              <div class="card-img-ph">Add photo</div>
+              <video class="card-img-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="@Url.Content("~/videos/thanks.mp4")" type="video/mp4" />
+              </video>
             </div>
             <h3 class="s-h3">Edifying events.</h3>
             <p class="s-body">Explore our events calendar to see what's happening this month. Join us for praise, workshops, and community moments and discover ways to get involved.</p>
@@ -141,7 +142,9 @@
           <!-- Card 3: Give -->
           <div class="card-col reveal d2">
             <div class="card-img">
-              <div class="card-img-ph">Add photo</div>
+              <video class="card-img-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="@Url.Content("~/videos/springmotion.mp4")" type="video/mp4" />
+              </video>
             </div>
             <h3 class="s-h3">Give for growth.</h3>
             <p class="s-body">Your generosity helps us carry out our mission, support our community, and make a lasting impact. Every gift, big or small, contributes to the work God is doing through us.</p>

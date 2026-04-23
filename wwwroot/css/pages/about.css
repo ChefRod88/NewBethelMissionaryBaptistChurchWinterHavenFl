@@ -257,27 +257,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   color: var(--gray-dark);
 }
 
-/* ── DEACON GRID ── */
-.deacon-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
-}
-.deacon-item {
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  padding: 24px 16px; border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.07);
-  text-align: center;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.deacon-item:hover { border-color: var(--accent); transform: translateY(-3px); }
-.deacon-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--bg); display: flex; align-items: center; justify-content: center;
-  font-family: 'Judson', serif; font-style: italic; font-size: 22px; color: var(--gray);
-  flex-shrink: 0;
-}
-.deacon-name { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: var(--black); }
-.deacon-role { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
-
 /* ── BIG CTA ── */
 .big-cta {
   display: flex; align-items: center; justify-content: space-evenly;
@@ -334,5 +313,4 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   .leader-grid { grid-template-columns: 1fr; }
   .lp-row-2, .lp-row-3 { grid-template-columns: 1fr; }
   .lp-row-3 .leader-card:nth-child(3) { grid-column: auto; }
-  .deacon-grid { grid-template-columns: 1fr 1fr; }
 }
