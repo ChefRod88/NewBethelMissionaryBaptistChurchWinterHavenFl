@@ -15,11 +15,12 @@
       <video
         class="about-hero-video"
         src='@Url.Content("~/videos/bannerflow.mp4")'
+        poster='@Url.Content("~/images/IMG_7706.jpg")'
         autoplay
         muted
         loop
         playsinline
-        preload="auto"
+        preload="metadata"
         aria-hidden="true"></video>
       <div class="about-hero-overlay" aria-hidden="true"></div>
     </div>
@@ -263,5 +264,6 @@
 </div><!-- end hero-section -->
 
 @section Scripts {
+<script src="~/js/hero-video-env.js" asp-append-version="true"></script>
 <script src="~/js/pages/about.js" asp-append-version="true"></script>
 }

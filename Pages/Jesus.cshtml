@@ -267,11 +267,12 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
     <video
       class="jesus-hero-video"
       src='@Url.Content("~/videos/risencross.mp4")'
+      poster='@Url.Content("~/images/IMG_7706.jpg")'
       autoplay
       muted
       loop
       playsinline
-      preload="auto"
+      preload="metadata"
       aria-hidden="true"></video>
     <div class="jesus-hero-overlay" aria-hidden="true"></div>
   </div>
@@ -440,6 +441,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 </div>
 
 @section Scripts {
+<script src="~/js/hero-video-env.js" asp-append-version="true"></script>
 <script>
   // Hero word blur-in
   window.addEventListener('load', () => {
@@ -452,7 +454,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
     const wrap = document.getElementById('jesusHeroBg');
     const v = document.querySelector('.jesus-hero-video');
     if (!wrap || !v) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (typeof window.skipHeavyHeroVideo === 'function' && window.skipHeavyHeroVideo()) {
       v.pause();
       v.removeAttribute('src');
       v.load();

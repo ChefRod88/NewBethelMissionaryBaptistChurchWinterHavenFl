@@ -3,7 +3,7 @@
   const wrap = document.getElementById('eventsHeroBg');
   const v = document.querySelector('.ev-hero-video');
   if (!wrap || !v) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (typeof window.skipHeavyHeroVideo === 'function' && window.skipHeavyHeroVideo()) {
     v.pause();
     v.removeAttribute('src');
     v.load();
