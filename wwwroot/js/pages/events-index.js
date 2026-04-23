@@ -1,9 +1,3 @@
-// Header word blur-in
-window.addEventListener('load', () => {
-  const words = document.querySelectorAll('.ev-eyebrow, .ev-title-word');
-  words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
-});
-
 // Hero video: muted + play() for autoplay; original gradient on error or reduced motion
 (function initEventsHeroVideo() {
   const wrap = document.getElementById('eventsHeroBg');

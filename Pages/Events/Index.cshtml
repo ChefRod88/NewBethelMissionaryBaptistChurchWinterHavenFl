@@ -9,8 +9,9 @@
 <link rel="stylesheet" href="~/css/pages/events-index.css" asp-append-version="true" />
 }
 
-<!-- PAGE HEADER (video background + overlay + copy — same model as /About hero) -->
-<div class="ev-page-header">
+<!-- PAGE HEADER (video background; no dark overlay) -->
+<div class="ev-page-header" aria-label="Events">
+  <h1 class="visually-hidden">@ViewData["Title"]</h1>
   <div class="ev-page-header-bg" id="eventsHeroBg">
     <video
       class="ev-hero-video"
@@ -21,15 +22,6 @@
       playsinline
       preload="auto"
       aria-hidden="true"></video>
-    <div class="ev-hero-overlay" aria-hidden="true"></div>
-  </div>
-  <div class="ev-page-header-inner">
-    <p class="ev-eyebrow">New Bethel Missionary Baptist Church</p>
-    <h1 class="ev-page-title">
-      <span class="ev-title-word"><em>Upcoming</em></span>
-      <span class="ev-title-word"> Events</span>
-    </h1>
-    <p class="ev-page-sub">Find events, gatherings, and ways to get connected<br>with our community in Winter Haven, Florida.</p>
   </div>
 </div>
 

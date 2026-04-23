@@ -32,7 +32,6 @@ flowchart TB
     DI[DI container]
     Opt[IOptions of ChurchSettings]
     EV[EventService in-memory]
-    GR[GroupService in-memory]
   end
   subgraph config [Configuration]
     apps[appsettings.json]
@@ -44,14 +43,13 @@ flowchart TB
   client --> RP
   RP --> Opt
   RP --> EV
-  RP --> GR
   config --> Opt
   RP --> static
 ```
 
-- **Razor Pages** provide HTML with strongly typed `PageModel` classes where used (`Index`, `Live`, `Error`, `Events`, `Groups`, etc.).
+- **Razor Pages** provide HTML with strongly typed `PageModel` classes where used (`Index`, `Live`, `Error`, `Events`, etc.).
 - **Church-wide data** (name, address, service times, social, live stream URL) flows from **`IOptions<ChurchSettings>`** bound to the `Church` section of `appsettings.json` (see `Models/ChurchSettings.cs`).
-- **Feature services** are **scoped** and currently backed by **static in-memory** lists: `IEventService` / `IGroupService` (`Services/EventService.cs`, `GroupService.cs`). This is a deliberate **placeholder for a future persistence layer** (SQL, Cosmos, or CMS).
+- **Feature services** are **scoped** and currently backed by a **static in-memory** list for `IEventService` (`Services/EventService.cs`). This is a deliberate **placeholder for a future persistence layer** (SQL, Cosmos, or CMS).
 - The HTTP pipeline in `Program.cs` applies HSTS, HTTPS redirection, exception handler (non-dev), static files, routing, and maps **`MapRazorPages().WithStaticAssets()`** for the modern static-asset story in .NET 9.
 
 ---
@@ -64,8 +62,8 @@ flowchart TB
 | `ChurchWebsite.csproj` | **Sole** project file for build/deploy |
 | `appsettings.json` | `Church` section → `ChurchSettings` |
 | `Pages/` | Razor Pages; `Shared/_Layout.cshtml` is the main chrome (nav, footer, OG tags, JSON-LD) |
-| `Models/` | `ChurchSettings`, `Event` (`ChurchEvent`), `Group` |
-| `Services/` | `EventService`, `GroupService` + interfaces |
+| `Models/` | `ChurchSettings`, `Event` (`ChurchEvent`) |
+| `Services/` | `EventService` + `IEventService` |
 | `wwwroot/css/pages/*.css` | Page-specific styles (About, Jesus, Give, Index, Live, Events, etc.) |
 | `wwwroot/js/pages/*.js` | Page-specific behavior (video fallback, parallax, accordions, word animations) |
 | `wwwroot/videos/*.mp4` | Hero/background **binary assets** (must be deployed with the app; 404s produce empty/black video) |
@@ -110,13 +108,8 @@ flowchart TB
 
 ### Events (`/Events`, `Events/Index.cshtml`)
 
-- **Video hero** (`thanks.mp4`) + eyebrow / title animation via **`wwwroot/js/pages/events-index.js`** (moved from inline for maintainability).
-- **Content** currently shows a **“To Be Announced”** block; a parallel **`EventService`** with in-memory `ChurchEvent` data **exists in code** but the Index page is **not yet listing** those events. By contrast, **`/Events/Details/{id}`** is wired to **`IEventService.GetById`** and will render or 404—there is a **list/detail mismatch** until the index lists events and links to details.
-
-### Groups (`/Groups` and `/Groups/Details`)
-
-- `GroupService` returns **in-memory** groups; **index + detail** pages consume IDs via routing.
-- Contact emails in seed data are **placeholders** (`placeholder@church.org`).
+- **Video hero** (`thanks.mp4`); no dark overlay; no hero headline text. Playback/fallback in **`wwwroot/js/pages/events-index.js`**.
+- **Content** area shows a **“To Be Announced”** block; **`EventService`** holds in-memory `ChurchEvent` data, but the Index page **does not list** those events. **`/Events/Details/{id}`** uses **`IEventService.GetById`**—a **list/detail mismatch** until the index links to details.
 
 ### Legal / errors
 
@@ -151,7 +144,6 @@ Key bindings (see `Models/ChurchSettings.cs`):
 | Service | Backing | Used by |
 |---------|---------|--------|
 | `EventService` | `static` `List<ChurchEvent>` in memory | `Events/Details` uses it; **Index does not list events** (no entry points from `/Events` to details) |
-| `GroupService` | `static` `List<Group>` in memory | `Groups/Index`, `Groups/Details` |
 
 **Implication:** there is **no** EF Core, no migrations, no admin API. Editorial workflow is **file-based** (Razor, CSS) plus **config** edits.
 
@@ -193,11 +185,11 @@ The repository previously contained an **xUnit** project; it was **removed** to 
 ## Roadmap (honest, from the codebase)
 
 1. **Events list ↔ `EventService` + details:** add event cards (or a calendar) on `/Events` linking to `Events/Details`, or remove dead seed data if the TBA state is final.
-2. **Replace placeholders:** photography blocks on **Index, Jesus, Give**; `Groups` and **Events** TBA/placeholder copy.
+2. **Replace placeholders:** photography blocks on **Index, Jesus, Give**; **Events** TBA/placeholder copy.
 3. **Config-driven secrets:** move **GraphHopper** (and any future keys) to **Azure App settings**; rotate any key that was committed in plain JSON.
 4. **Use `Routing` settings** or remove unused config: either implement “directions to church” (client map + GraphHopper) or **delete** the unused `Routing` subtree to avoid confusion.
 5. **Auth (optional):** if an **admin** area is added, add authentication and **do not** rely on the current `UseAuthorization` no-op.
-6. **Persistence:** swap in **SQL** or headless **CMS** for events/groups/sermons if editorial frequency grows.
+6. **Persistence:** swap in **SQL** or headless **CMS** for events and other content if editorial frequency grows.
 7. **Performance / cost:** large **MP4** files in `wwwroot/videos` may warrant **Git LFS**, **CDN** (Azure Storage + CDN), or **re-encode** for size; GitHub warns on files **> 50 MB**.
 8. **Accessibility:** continue auditing **contrast** on video heroes, **focus** on mobile menu, and **motion** preferences across scroll effects.
 
