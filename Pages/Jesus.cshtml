@@ -6,6 +6,7 @@
 
 @section Head {
 <meta name="description" content="Learn about who Jesus is, what He taught, and what it means to follow Him at New Bethel Missionary Baptist Church.">
+<link rel="preload" as="video" type="video/mp4" href="~/videos/risencross.mp4" asp-append-version="true" />
 <style>
 /* ── TOKENS ── */
 :root {
@@ -267,12 +268,11 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
     <video
       class="jesus-hero-video"
       src='@Url.Content("~/videos/risencross.mp4")'
-      poster='@Url.Content("~/images/IMG_7706.jpg")'
       autoplay
       muted
       loop
       playsinline
-      preload="metadata"
+      preload="auto"
       aria-hidden="true"></video>
     <div class="jesus-hero-overlay" aria-hidden="true"></div>
   </div>

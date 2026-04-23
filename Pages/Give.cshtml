@@ -9,6 +9,7 @@
 
 @section Head {
 <meta name="description" content="Give to New Bethel Missionary Baptist Church. Your generosity helps us carry out our mission and support our community.">
+<link rel="preload" as="video" type="video/mp4" href="~/videos/give.mp4" asp-append-version="true" />
 <style>
 /* ── TOKENS ── */
 :root {
@@ -280,8 +281,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
       muted
       loop
       playsinline
-      preload="metadata"
-      poster="@Url.Content("~/images/IMG_7706.jpg")"
+      preload="auto"
       aria-hidden="true"></video>
     <div class="give-hero-overlay" aria-hidden="true"></div>
   </div>
