@@ -1,3 +1,9 @@
+// Hero word blur-in
+window.addEventListener('load', () => {
+  const words = document.querySelectorAll('.word');
+  words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+});
+
 // Parallax hero
 window.addEventListener('scroll', () => {
   const y = window.scrollY;

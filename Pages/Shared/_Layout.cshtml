@@ -213,9 +213,6 @@
     <a href="/Jesus" onclick="closeMobileNav()">Jesus</a>
     <a href="/About" onclick="closeMobileNav()">About</a>
     <a href="/Events" onclick="closeMobileNav()">Events</a>
-    <a href="/Sermons" onclick="closeMobileNav()">Sermons</a>
-    <a href="/Prayer" onclick="closeMobileNav()">Prayer</a>
-    <a href="/Location" onclick="closeMobileNav()">Visit</a>
     <a href="/Groups" onclick="closeMobileNav()">Groups</a>
     @if (!string.IsNullOrEmpty(church.SocialMedia.YouTube))
     {
@@ -232,9 +229,6 @@
             <a href="/Jesus" class="@(IsActive("/Jesus") ? "nav-active" : "")">Jesus</a>
             <a href="/About" class="@(IsActive("/About") ? "nav-active" : "")">About</a>
             <a href="/Events" class="@(IsEvents ? "nav-active" : "")">Events</a>
-            <a href="/Sermons" class="@(IsActive("/Sermons") ? "nav-active" : "")">Sermons</a>
-            <a href="/Prayer" class="@(IsActive("/Prayer") ? "nav-active" : "")">Prayer</a>
-            <a href="/Location" class="@(IsActive("/Location") ? "nav-active" : "")">Visit</a>
             @if (!string.IsNullOrEmpty(church.SocialMedia.YouTube))
             {
                 <a href="@church.SocialMedia.YouTube" target="_blank" rel="noopener">Watch</a>
@@ -280,9 +274,6 @@
             <a href="/Give">give</a>
             <a href="/Jesus">jesus</a>
             <a href="/Events">events</a>
-            <a href="/Sermons">sermons</a>
-            <a href="/Prayer">prayer</a>
-            <a href="/Location">visit</a>
             <a href="/Groups">groups</a>
             <a href="/About">about us</a>
         </div>
@@ -293,7 +284,7 @@
     </div>
 
     <div class="edify-footer-bottom">
-        <span>© @DateTime.Now.Year, NEW BETHEL MISSIONARY BAPTIST CHURCH · <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Photos from Pexels</a></span>
+        <span>© @DateTime.Now.Year, NEW BETHEL MISSIONARY BAPTIST CHURCH</span>
         <div class="edify-footer-socials">
             @if (!string.IsNullOrEmpty(church.SocialMedia.YouTube))
             {
@@ -348,7 +339,6 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/js/location-fallback.js" asp-append-version="true"></script>
 <script>
     // Nav scroll shadow
     const navHost = document.getElementById('navHost');

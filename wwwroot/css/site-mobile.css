@@ -114,38 +114,11 @@
       margin-bottom: 1.5rem !important;
     }
   
-    /* ── SERMONS SECTION ── */
-    .sermons-section {
-      padding: 3rem 0;
-    }
-  
-    /* Sermons: text block stacks above thumbnails */
-    .sermons-section .col-lg-4 {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-  
-    .sermons-section h2 {
-      font-size: 1.6rem;
-    }
-  
-    /* Sermon thumbnails: 2-column on tablet */
-    .sermons-section .row.g-3 .col-md-4 {
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-  
     /* ── EVENTS PAGE ── */
     /* Event cards fill full width on tablet */
     .events-page .col-lg-4 {
       flex: 0 0 50%;
       max-width: 50%;
-    }
-  
-    /* ── PRAYER PAGE ── */
-    .prayer-page .col-lg-6,
-    .container .col-lg-6 {
-      padding: 0 1rem;
     }
   
     /* ── PAGE HEADINGS ── */
@@ -323,49 +296,6 @@
       margin-bottom: 1.5rem !important;
     }
   
-    /* ── SERMONS SECTION ── */
-    .sermons-section {
-      padding: 2.5rem 0;
-    }
-  
-    /* Heading block: full width, centered */
-    .sermons-section .col-lg-4 {
-      margin-bottom: 1.75rem;
-      text-align: center;
-    }
-  
-    .sermons-section h2 {
-      font-size: 1.4rem;
-      line-height: 1.22;
-      margin-bottom: 0.75rem;
-    }
-  
-    .sermons-section .text-white-50 {
-      font-size: 0.88rem;
-    }
-  
-    /* Sermons: 1-column grid on small phone */
-    .sermons-section .row.g-3 .col-md-4 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  
-    .sermon-thumb {
-      border-radius: 10px;
-    }
-  
-    .sermon-thumb-title {
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-    }
-  
-    /* View all sermons button: full width */
-    .sermons-section .btn-church-secondary {
-      width: 100%;
-      max-width: 260px;
-      min-height: 48px;
-    }
-  
     /* ── EVENTS PAGE ── */
     /* Single column on phone */
     .container .col-md-6,
@@ -380,13 +310,13 @@
       object-fit: cover;
     }
   
-    /* Event/sermon card body: larger touch targets */
+    /* Event card body: larger touch targets */
     .card-body .btn {
       min-height: 44px;
       width: 100%;
     }
   
-    /* Page heading on events/sermons/groups */
+    /* Page heading on events/groups */
     .container .text-center h1.display-5 {
       font-size: 1.75rem;
       margin-bottom: 0.5rem;
@@ -394,12 +324,6 @@
   
     .container .text-center p.lead {
       font-size: 0.95rem;
-    }
-  
-    /* ── SERMONS LIST PAGE ── */
-    .container .ratio.ratio-16x9 {
-      border-radius: 8px;
-      overflow: hidden;
     }
   
     /* ── PRAYER PAGE ── */
@@ -432,11 +356,6 @@
       letter-spacing: 0.1em;
     }
   
-    /* Page heading: prayer */
-    .container h1.display-5.fw-bold {
-      font-size: 1.75rem;
-    }
-  
     /* ── GROUPS PAGE ── */
     /* Groups cards: 1 column, full width */
     .groups-page .col-md-6,
@@ -462,48 +381,6 @@
     .ratio.ratio-16x9 {
       border-radius: 8px;
       overflow: hidden;
-    }
-  
-    /* ── LOCATION PAGE ── */
-    /* Directions panel: less height on phone so map is still visible */
-    .location-directions-panel {
-      min-height: clamp(160px, 25svh, 260px);
-      max-height: min(42svh, 340px);
-      padding: 0.75rem;
-    }
-  
-    .location-directions-title {
-      font-size: 0.88rem;
-    }
-  
-    .location-directions-meta {
-      font-size: 0.72rem;
-    }
-  
-    .location-directions-steps {
-      font-size: 0.75rem;
-      line-height: 1.3;
-    }
-  
-    /* Status card at top of map */
-    .location-status-card {
-      width: calc(100% - 1rem);
-      max-height: 0.55in;
-    }
-  
-    .location-status-title {
-      font-size: 0.82rem;
-    }
-  
-    .location-status-text {
-      font-size: 0.74rem;
-    }
-  
-    /* Map buttons: stacked on very narrow phone */
-    .location-map-link-btn {
-      font-size: 0.72rem;
-      padding: 0.4rem 0.5rem;
-      min-height: 40px;
     }
   
     /* ── GLOBAL FOOTER BAR ── */
@@ -578,11 +455,6 @@
     /* Card titles */
     .card-image-content h3 {
       font-size: 1.1rem;
-    }
-  
-    /* Sermon section title */
-    .sermons-section h2 {
-      font-size: 1.25rem;
     }
   
     /* Card image overlay: compact */
