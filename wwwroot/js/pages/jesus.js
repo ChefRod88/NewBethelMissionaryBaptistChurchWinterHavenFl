@@ -4,12 +4,36 @@ window.addEventListener('load', () => {
   words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
 });
 
+// Hero video (mirrors inline script in Jesus.cshtml)
+(function initJesusHeroVideo() {
+  const wrap = document.getElementById('jesusHeroBg');
+  const v = document.querySelector('.jesus-hero-video');
+  if (!wrap || !v) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    v.pause();
+    v.removeAttribute('src');
+    v.load();
+    wrap.classList.add('is-fallback');
+    return;
+  }
+  v.muted = true;
+  v.defaultMuted = true;
+  v.setAttribute('muted', '');
+  const tryPlay = function tryPlay() { v.play().catch(function () {}); };
+  v.addEventListener('loadeddata', tryPlay, { once: true });
+  v.addEventListener('canplay', tryPlay, { once: true });
+  tryPlay();
+  v.addEventListener('error', function onVideoError() {
+    wrap.classList.add('is-fallback');
+  }, { once: true });
+})();
+
 // Parallax hero
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  const bg = document.querySelector('.jesus-hero-ph, .jesus-hero-img');
+  const bg = document.querySelector('.jesus-hero-video');
   if (bg) bg.style.transform = `translateY(${y * 0.3}px)`;
-  const txt = document.querySelector('.jesus-hero-text');
+  const txt = document.querySelector('.jesus-hero-text-wrap');
   if (txt) txt.style.transform = `translateY(${y * 0.15}px)`;
 }, { passive: true });
 

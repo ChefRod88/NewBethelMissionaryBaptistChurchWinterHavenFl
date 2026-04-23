@@ -20,29 +20,65 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--black); overflow-x: hidden; }
 
-/* ── HERO ── */
-.jesus-hero {
-  width: 100%; height: 75vh; min-height: 500px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  background: var(--bg);
+/* ── HERO (bg wrap + video + overlay + text layer — same model as /Give and home) ── */
+.jesus-hero-section {
+  --jesus-hero-h: 75vh;
+  --jesus-hero-minh: 500px;
+  position: relative;
+  width: 100%;
+  background: #000;
 }
-.jesus-hero-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover;
+.jesus-hero-bg-wrap {
+  width: 100%;
+  height: var(--jesus-hero-h);
+  min-height: var(--jesus-hero-minh);
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+.jesus-hero-bg-wrap.is-fallback {
+  background: linear-gradient(160deg, #0d1a12 0%, #112218 50%, #0d1a12 100%);
+}
+.jesus-hero-bg-wrap.is-fallback .jesus-hero-video {
+  display: none;
+}
+.jesus-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
   will-change: transform;
 }
-.jesus-hero-ph {
-  position: absolute; inset: 0;
-  background: linear-gradient(160deg, #0d1a12 0%, #112218 50%, #0d1a12 100%);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 12px;
-  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(255,255,255,0.2);
+.jesus-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.38);
+  pointer-events: none;
+}
+.jesus-hero-text-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--jesus-hero-h);
+  min-height: var(--jesus-hero-minh);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .jesus-hero-text {
-  position: relative; z-index: 2;
+  position: relative;
+  z-index: 2;
   text-align: center;
+  max-width: 900px;
+  padding: 0 24px;
 }
 .jesus-hero-title {
   font-family: 'Judson', serif; font-style: italic;
@@ -226,15 +262,25 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 }
 
 <!-- HERO -->
-<div class="jesus-hero">
-  <div class="jesus-hero-ph">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    Replace with hero photo
+<section class="jesus-hero-section" aria-label="Jesus">
+  <div class="jesus-hero-bg-wrap" id="jesusHeroBg">
+    <video
+      class="jesus-hero-video"
+      src='@Url.Content("~/videos/risencross.mp4")'
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"></video>
+    <div class="jesus-hero-overlay" aria-hidden="true"></div>
   </div>
-  <div class="jesus-hero-text">
-    <h1 class="jesus-hero-title"><span class="word"><strong>Jesus</strong></span></h1>
+  <div class="jesus-hero-text-wrap">
+    <div class="jesus-hero-text">
+      <h1 class="jesus-hero-title"><span class="word"><strong>Jesus</strong></span></h1>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- WHITE LIFT -->
 <div class="white-lift">
@@ -401,12 +447,36 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
     words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
   });
 
+  // Hero video: keep muted + play() for browsers that ignore autoplay; fallback if file missing
+  (function () {
+    const wrap = document.getElementById('jesusHeroBg');
+    const v = document.querySelector('.jesus-hero-video');
+    if (!wrap || !v) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.pause();
+      v.removeAttribute('src');
+      v.load();
+      wrap.classList.add('is-fallback');
+      return;
+    }
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute('muted', '');
+    const tryPlay = function () { v.play().catch(function () {}); };
+    v.addEventListener('loadeddata', tryPlay, { once: true });
+    v.addEventListener('canplay', tryPlay, { once: true });
+    tryPlay();
+    v.addEventListener('error', function () {
+      wrap.classList.add('is-fallback');
+    }, { once: true });
+  })();
+
   // Parallax hero
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    const bg = document.querySelector('.jesus-hero-ph, .jesus-hero-img');
+    const bg = document.querySelector('.jesus-hero-video');
     if (bg) bg.style.transform = `translateY(${y * 0.3}px)`;
-    const txt = document.querySelector('.jesus-hero-text');
+    const txt = document.querySelector('.jesus-hero-text-wrap');
     if (txt) txt.style.transform = `translateY(${y * 0.15}px)`;
   }, { passive: true });
 

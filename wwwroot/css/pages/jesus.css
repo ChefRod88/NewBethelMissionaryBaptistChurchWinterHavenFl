@@ -11,29 +11,65 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--black); overflow-x: hidden; }
 
-/* ── HERO ── */
-.jesus-hero {
-  width: 100%; height: 75vh; min-height: 500px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  background: var(--bg);
+/* ── HERO (same stacking model as /Give and home — keep in sync with Jesus.cshtml inline hero block) ── */
+.jesus-hero-section {
+  --jesus-hero-h: 75vh;
+  --jesus-hero-minh: 500px;
+  position: relative;
+  width: 100%;
+  background: #000;
 }
-.jesus-hero-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover;
+.jesus-hero-bg-wrap {
+  width: 100%;
+  height: var(--jesus-hero-h);
+  min-height: var(--jesus-hero-minh);
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+.jesus-hero-bg-wrap.is-fallback {
+  background: linear-gradient(160deg, #0d1a12 0%, #112218 50%, #0d1a12 100%);
+}
+.jesus-hero-bg-wrap.is-fallback .jesus-hero-video {
+  display: none;
+}
+.jesus-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
   will-change: transform;
 }
-.jesus-hero-ph {
-  position: absolute; inset: 0;
-  background: linear-gradient(160deg, #0d1a12 0%, #112218 50%, #0d1a12 100%);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 12px;
-  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(255,255,255,0.2);
+.jesus-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.38);
+  pointer-events: none;
+}
+.jesus-hero-text-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--jesus-hero-h);
+  min-height: var(--jesus-hero-minh);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .jesus-hero-text {
-  position: relative; z-index: 2;
+  position: relative;
+  z-index: 2;
   text-align: center;
+  max-width: 900px;
+  padding: 0 24px;
 }
 .jesus-hero-title {
   font-family: 'Judson', serif; font-style: italic;
