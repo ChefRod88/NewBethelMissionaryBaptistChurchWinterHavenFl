@@ -9,9 +9,20 @@
 <link rel="stylesheet" href="~/css/pages/events-index.css" asp-append-version="true" />
 }
 
-<!-- PAGE HEADER -->
+<!-- PAGE HEADER (video background + overlay + copy — same model as /About hero) -->
 <div class="ev-page-header">
-  <div class="ev-page-header-bg"></div>
+  <div class="ev-page-header-bg" id="eventsHeroBg">
+    <video
+      class="ev-hero-video"
+      src='@Url.Content("~/videos/thanks.mp4")'
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"></video>
+    <div class="ev-hero-overlay" aria-hidden="true"></div>
+  </div>
   <div class="ev-page-header-inner">
     <p class="ev-eyebrow">New Bethel Missionary Baptist Church</p>
     <h1 class="ev-page-title">
@@ -46,10 +57,5 @@
 </div><!-- end white-lift -->
 
 @section Scripts {
-<script>
-  window.addEventListener('load', () => {
-    const words = document.querySelectorAll('.ev-eyebrow, .ev-title-word');
-    words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
-  });
-</script>
+<script src="~/js/pages/events-index.js" asp-append-version="true"></script>
 }

@@ -2,8 +2,8 @@ namespace ChurchWebsite.Tests.AnimationTests;
 
 /// <summary>
 /// Verifies the "coming alive" blur-in animation is correctly wired on the Events page.
-/// Events uses an external events-index.css (loaded correctly) but an inline &lt;script&gt; block,
-/// so the JS must live in Index.cshtml directly. CSS targets .ev-title-word and .ev-eyebrow.
+/// CSS: <c>wwwroot/css/pages/events-index.css</c>. JS: <c>wwwroot/js/pages/events-index.js</c>
+/// (loaded from the Scripts section in <c>Pages/Events/Index.cshtml</c>). CSS targets .ev-title-word and .ev-eyebrow.
 /// </summary>
 public class EventsPageAnimationTests
 {
@@ -45,18 +45,26 @@ public class EventsPageAnimationTests
     }
 
     [Fact]
-    public void Events_Cshtml_InlineScript_HasLoadEventTargetingTitleWords()
+    public void Events_Cshtml_ScriptsReferenceEventsIndexJs()
     {
         var html = Read("Pages/Events/Index.cshtml");
-        Assert.Contains("window.addEventListener('load'", html);
+        Assert.Contains("events-index.js", html);
         Assert.Contains("ev-title-word", html);
-        Assert.Contains("classList.add('show')", html);
     }
 
     [Fact]
-    public void Events_Cshtml_InlineScript_HasLoadEventTargetingEyebrow()
+    public void EventsIndexJs_LoadHandler_AddsShowToTitleWords()
     {
-        var html = Read("Pages/Events/Index.cshtml");
-        Assert.Contains("ev-eyebrow", html);
+        var js = Read("wwwroot/js/pages/events-index.js");
+        Assert.Contains("window.addEventListener('load'", js);
+        Assert.Contains("ev-title-word", js);
+        Assert.Contains("classList.add('show')", js);
+    }
+
+    [Fact]
+    public void EventsIndexJs_LoadHandler_IncludesEyebrow()
+    {
+        var js = Read("wwwroot/js/pages/events-index.js");
+        Assert.Contains("ev-eyebrow", js);
     }
 }
