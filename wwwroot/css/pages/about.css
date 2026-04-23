@@ -184,10 +184,21 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 .values-right-text { flex: 1; text-align: right; }
 .faith-phrases { flex: 1; }
 
-/* ── LEADERSHIP CARDS ── */
+/* ── LEADERSHIP CARDS (pyramid: 1 → 2 → 3) ── */
 .leader-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px;
 }
+.leader-pyramid {
+  display: flex; flex-direction: column; align-items: center; gap: 40px; width: 100%;
+}
+.lp-row {
+  display: grid; gap: 40px; width: 100%; max-width: 1000px;
+  justify-items: center;
+}
+.lp-row .leader-card { width: 100%; max-width: 400px; }
+.lp-row-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lp-row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lp-row-top { max-width: 400px; }
 .leader-card {
   display: flex; flex-direction: column; gap: 20px;
 }
@@ -297,8 +308,12 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.d1 { transition-delay: 0.1s; }
-.d2 { transition-delay: 0.2s; }
+.d0 { transition-delay: 0s; }
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.12s; }
+.d3 { transition-delay: 0.16s; }
+.d4 { transition-delay: 0.2s; }
+.d5 { transition-delay: 0.24s; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
@@ -307,6 +322,9 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   .row-reverse { flex-direction: column; }
   .row-img { width: 80%; margin: 0 auto; }
   .leader-grid { grid-template-columns: 1fr 1fr; }
+  .lp-row-2 { grid-template-columns: 1fr 1fr; }
+  .lp-row-3 { grid-template-columns: 1fr 1fr; }
+  .lp-row-3 .leader-card:nth-child(3) { grid-column: 1 / -1; max-width: 400px; justify-self: center; }
   .big-cta-circle { width: 60px; height: 60px; }
 }
 @media (max-width: 600px) {
@@ -314,5 +332,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   .section-gray { padding: 80px 0 80px; }
   .white-lift { border-radius: 30px 30px 0 0; }
   .leader-grid { grid-template-columns: 1fr; }
+  .lp-row-2, .lp-row-3 { grid-template-columns: 1fr; }
+  .lp-row-3 .leader-card:nth-child(3) { grid-column: auto; }
   .deacon-grid { grid-template-columns: 1fr 1fr; }
 }
