@@ -275,10 +275,5 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   .section-white { padding: 80px 0 80px; }
   .section-gray { padding: 100px 0 80px; }
   .white-lift { border-radius: 30px 30px 0 0; }
-  /* Hero video: cover crops sides on narrow tall screens. Contain = full frame visible (crown L/R); dark bg shows letterbox. */
-  .hero-bg-wrap .hero-video {
-    object-fit: contain;
-    object-position: center center;
-  }
   /* Hero video stays visible (playsinline); was display:none here which looked “frozen” on phones/narrow devtools. */
 }
