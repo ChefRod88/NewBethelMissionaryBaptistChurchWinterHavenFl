@@ -21,6 +21,13 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   width: 100%; height: 110vh; min-height: 600px;
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
+  background: #0f0c14;
+}
+.hero-bg-wrap.hero-bg-fallback {
+  background: linear-gradient(160deg, #1a1520 0%, #2a1f35 50%, #1a2030 100%);
+}
+.hero-bg-wrap.hero-bg-fallback .hero-video {
+  display: none;
 }
 .hero-video {
   position: absolute; inset: 0;
@@ -268,6 +275,5 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
   .section-white { padding: 80px 0 80px; }
   .section-gray { padding: 100px 0 80px; }
   .white-lift { border-radius: 30px 30px 0 0; }
-  .hero-video { display: none; }
-  .hero-bg-wrap { background: linear-gradient(160deg, #1a1520 0%, #2a1f35 50%, #1a2030 100%); }
+  /* Hero video stays visible (playsinline); was display:none here which looked “frozen” on phones/narrow devtools. */
 }

@@ -13,19 +13,57 @@ window.addEventListener('scroll', () => {
   if (txt) txt.style.transform = `translateY(${y * 0.15}px)`;
 }, { passive: true });
 
-// Pause video for reduced-motion preference or slow connections
-const heroVid = document.querySelector('.hero-video');
-if (heroVid) {
+// Hero video: respect reduced motion / save-data; otherwise force muted + play() for reliable autoplay
+(function () {
+  const heroVid = document.querySelector('.hero-video');
+  const wrap = document.getElementById('heroBgWrap');
+  if (!heroVid) return;
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     heroVid.pause();
-  }
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  if (conn && (conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g')) {
-    heroVid.style.display = 'none';
+    heroVid.querySelectorAll('source').forEach(function (s) { s.remove(); });
     heroVid.removeAttribute('src');
     heroVid.load();
+    if (wrap) wrap.classList.add('hero-bg-fallback');
+    return;
   }
-}
+
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (conn && (conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g')) {
+    heroVid.querySelectorAll('source').forEach(function (s) { s.remove(); });
+    heroVid.removeAttribute('src');
+    heroVid.load();
+    if (wrap) wrap.classList.add('hero-bg-fallback');
+    return;
+  }
+
+  heroVid.muted = true;
+  heroVid.defaultMuted = true;
+  heroVid.setAttribute('muted', '');
+
+  // Faster, more dynamic hero motion (motionglass.mp4 is subtle at 1×)
+  var HERO_PLAYBACK_RATE = 1.75;
+  function applyHeroPlaybackRate() {
+    try {
+      heroVid.playbackRate = HERO_PLAYBACK_RATE;
+    } catch (e) { /* ignore */ }
+  }
+  applyHeroPlaybackRate();
+  heroVid.addEventListener('loadedmetadata', applyHeroPlaybackRate, { once: true });
+
+  var tryPlay = function () {
+    applyHeroPlaybackRate();
+    heroVid.play()
+      .then(function () { applyHeroPlaybackRate(); })
+      .catch(function () {});
+  };
+  heroVid.addEventListener('loadeddata', tryPlay, { once: true });
+  heroVid.addEventListener('canplay', tryPlay, { once: true });
+  tryPlay();
+  if (wrap) {
+    heroVid.addEventListener('error', function () { wrap.classList.add('hero-bg-fallback'); }, { once: true });
+  }
+})();
 
 // Scroll reveal
 const obs = new IntersectionObserver(entries => {
