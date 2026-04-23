@@ -7,7 +7,7 @@ public class ChurchSettings
 
     public List<string> Name { get; set; } = [];               // Church name lines (supports multiline display)
     public string Tagline { get; set; } = string.Empty;         // Short tagline; fallback for hero headline
-    public string HeroImageUrl { get; set; } = string.Empty;     // Path to hero bg image (e.g. /images/collage.jpg); empty = collage.jpg in Index
+    public string HeroImageUrl { get; set; } = string.Empty;     // Default OG / Live fallback image (e.g. /images/IMG_7706.jpg)
     public string HeroHeadline { get; set; } = string.Empty;    // Main headline on home hero
     public string MissionStatement { get; set; } = string.Empty;  // Blue mission section on home
     public string MissionSubtext { get; set; } = string.Empty;  // Subtext under mission
