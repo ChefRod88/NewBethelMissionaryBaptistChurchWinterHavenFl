@@ -18,6 +18,18 @@ When adding styles or scripts for a new page or feature:
 2. Use scoped class prefixes (e.g. `.sp-` for self-pay, `.lien-` for lien) to avoid collisions.
 3. The layout (`Pages/Shared/_Layout.cshtml`) controls which bundles load via `ViewData["BookingPage"]` — keep that pattern; do not add new `<link>` or `<script>` tags directly in page files.
 
+## Hero background video & `wwwroot` media
+
+**Untracked or undeployed video files produce a black hero** (only the CSS `background` shows). The `<video>` element has nothing to decode if the URL 404s.
+
+Rules for this codebase:
+
+1. **Commit and deploy binary media** under `wwwroot/` (e.g. `wwwroot/videos/give.mp4`). If a file stays untracked (`git status` shows `??`) or is gitignored, **production will not have it** unless the host uploads it some other way.
+2. **Verify in the browser:** DevTools → **Network** → reload the page → confirm the `.mp4` request is **200**, not **404** or blocked.
+3. **Hero layout:** Full-bleed background videos should follow the same stacking model as the home page: a **background wrapper** (video + optional overlay inside) and a **separate, absolutely positioned text layer** over the same height (see `Pages/Give.cshtml` `give-hero-section` / `give-hero-bg-wrap` / `give-hero-text-wrap` and `Pages/Index.cshtml` `hero-bg-wrap` / `hero-text-wrap`). Avoid relying on `z-index: -1` on the video without a clear stacking context—prefer `z-index: 0` on the video, higher values on overlay and copy.
+4. **Playback:** Use `autoplay`, `muted`, `loop`, and `playsinline`; in script, set `muted = true` and call `video.play().catch(() => {})` after load where autoplay is flaky. Handle `error` on the video (e.g. gradient fallback) so a missing file is not an empty black box.
+5. **Server static files:** `Program.cs` must include `app.UseStaticFiles()` so `wwwroot` paths like `/videos/...` are served in addition to any fingerprinted static-asset pipeline.
+
 ## Git workflow
 
 **Local review before any push to GitHub**
@@ -51,11 +63,12 @@ git commit -m "type: description" # commit with a clear message
 **Rules:**
 
 - Always `git status` before staging so you know exactly what you're committing
-- Never commit with a vague message like "changes", "stuff", or "fix"
+- Never commit with a vague message like “changes”, “stuff”, or “fix”
 - Commit after each meaningful change — do not batch up many unrelated changes into one commit
 - Pushes to `origin` follow **local review and user approval** (see “Local review before any push”); do not push unreviewed work
 - Never force-push (`git push --force`) without explicit instruction — it can overwrite history and break the Azure deployment
 - The active branch is `cursor/development-environment-setup-7ed9` — always push to this branch
+- **Never add `Co-Authored-By` or any AI attribution to commit messages.** Rodney Chery is the sole author of this project. Commit messages must contain only the subject and body — no trailing attribution lines of any kind.
 
 ## Task completion (after every task)
 

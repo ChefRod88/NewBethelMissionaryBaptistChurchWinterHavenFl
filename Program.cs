@@ -26,6 +26,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();   // Redirect HTTP to HTTPS
+app.UseStaticFiles();        // wwwroot (videos, images) — pairs with fingerprinted MapStaticAssets
 app.UseRouting();            // Enable endpoint routing
 app.UseAuthorization();      // Auth middleware (no auth configured yet)
 

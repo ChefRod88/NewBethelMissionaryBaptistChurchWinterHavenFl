@@ -3,12 +3,6 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Home";
-    var heroSrc = string.IsNullOrWhiteSpace(Model.Church.HeroImageUrl)
-        ? "/images/collage.jpg"
-        : Model.Church.HeroImageUrl.Trim();
-    var heroAlt = string.IsNullOrWhiteSpace(Model.Church.NameText)
-        ? "New Bethel Missionary Baptist Church"
-        : Model.Church.NameText;
 }
 
 @section Head {
@@ -20,7 +14,13 @@
 <div class="hero-section">
 
   <div class="hero-bg-wrap" id="heroBgWrap">
-    <img src="@heroSrc" alt="@heroAlt" loading="eager" decoding="async" asp-append-version="true" />
+    <video
+      class="hero-video"
+      autoplay muted loop playsinline
+      poster="/images/collage.jpg"
+      preload="auto">
+      <source src="/videos/motionglass.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="hero-text-wrap">
