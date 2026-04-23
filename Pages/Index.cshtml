@@ -10,27 +10,27 @@
 <link rel="stylesheet" href="~/css/pages/index.css" asp-append-version="true" />
 }
 
-<!-- ══════════════════ HERO ══════════════════ -->
+<!-- ══════════════════ HERO (viewport = video + text only — same model as About/Give) ══════════════════ -->
 <div class="hero-section">
 
-  <div class="hero-bg-wrap" id="heroBgWrap">
-    <video
-      class="hero-video"
-      autoplay muted loop playsinline
-      poster="/images/IMG_7706.jpg"
-      preload="metadata">
-      <source src="/videos/motionglass.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div class="hero-text-wrap">
-    <h1 class="hero-church-name">
-      <span class="word"><strong>New Bethel</strong></span><span class="word"> Missionary</span><br>
-      <span class="word">Baptist</span><span class="word"> Church</span>
-    </h1>
-    <p class="hero-tagline">
-      <span class="word">welcome</span>&nbsp;<span class="word">home.</span>
-    </p>
+  <div class="home-hero-viewport">
+    <div class="hero-bg-wrap" id="heroBgWrap">
+      <video
+        class="hero-video"
+        autoplay muted loop playsinline
+        poster="/images/IMG_7706.jpg"
+        preload="metadata">
+        <source src="/videos/motionglass.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-text-wrap">
+      <div class="hero-scripture" lang="en">
+        <h1 class="hero-scripture-title">
+          <span class="word"><span class="hero-text-judson">I can do all things through Christ</span><span class="hero-text-lora"> which strengtheneth me.</span></span>
+        </h1>
+        <p class="hero-scripture-ref"><span class="word">Philippians 4:13</span></p>
+      </div>
+    </div>
   </div>
 
   <!-- WHITE CARD LIFT -->
