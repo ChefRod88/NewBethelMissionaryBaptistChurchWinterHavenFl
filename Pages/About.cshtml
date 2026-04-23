@@ -8,12 +8,20 @@
 <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
 }
 
-<!-- HERO -->
+<!-- HERO (video bg + overlay + text — same stacking model as /Jesus and /Give) -->
 <div class="hero-section">
-  <div class="hero-bg-wrap" id="heroBgWrap">
-    <div class="hero-bg-placeholder">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      Replace with church building or congregation photo
+  <div class="about-hero-viewport">
+    <div class="hero-bg-wrap" id="aboutHeroBg">
+      <video
+        class="about-hero-video"
+        src='@Url.Content("~/videos/bannerflow.mp4")'
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"></video>
+      <div class="about-hero-overlay" aria-hidden="true"></div>
     </div>
     <div class="hero-text-wrap">
       <p class="hero-eyebrow word">Our Story</p>
