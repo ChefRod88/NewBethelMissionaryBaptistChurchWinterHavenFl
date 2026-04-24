@@ -1,8 +1,17 @@
-// Hero word blur-in
-window.addEventListener('load', () => {
-  const words = document.querySelectorAll('.word');
-  words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
-});
+// Hero word blur-in — DOM ready, not window load (kept in sync with Give.cshtml when wired)
+(function () {
+  const words = document.querySelectorAll('.give-hero-text-inner .word');
+  const tag = document.querySelector('.give-hero-tagline');
+  const run = () => {
+    words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+    if (tag) setTimeout(() => tag.classList.add('show'), 450);
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
 
 // Parallax hero
 window.addEventListener('scroll', () => {

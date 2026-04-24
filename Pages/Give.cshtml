@@ -360,13 +360,20 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--bl
 @section Scripts {
 <script src="~/js/hero-video-env.js" asp-append-version="true"></script>
 <script>
-  // Hero word blur-in
-  window.addEventListener('load', () => {
-    const words = document.querySelectorAll('.word');
-    words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+  // Hero word blur-in + tagline — DOM ready, not window load (same as home / About)
+  (function () {
+    const words = document.querySelectorAll('.give-hero-text-inner .word');
     const tag = document.querySelector('.give-hero-tagline');
-    if (tag) setTimeout(() => tag.classList.add('show'), 450);
-  });
+    const run = () => {
+      words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+      if (tag) setTimeout(() => tag.classList.add('show'), 450);
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+  })();
 
   // Hero video: keep muted + play() for browsers that ignore autoplay; fallback if file missing
   (function () {

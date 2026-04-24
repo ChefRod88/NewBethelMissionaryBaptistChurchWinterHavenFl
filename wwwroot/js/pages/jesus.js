@@ -1,8 +1,16 @@
-// Hero word blur-in
-window.addEventListener('load', () => {
-  const words = document.querySelectorAll('.word');
-  words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
-});
+// Hero word blur-in — DOM ready, not window load (kept in sync with inline Jesus.cshtml)
+(function () {
+  const words = document.querySelectorAll('.jesus-hero-section .word');
+  if (!words.length) return;
+  const run = () => {
+    words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
 
 // Hero video (mirrors inline script in Jesus.cshtml)
 (function initJesusHeroVideo() {

@@ -1,8 +1,16 @@
-// Hero word blur-in
-window.addEventListener('load', () => {
-  const words = document.querySelectorAll('.word');
-  words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
-});
+// Hero word blur-in — DOM ready, not window load (same as home Index)
+(function () {
+  const words = document.querySelectorAll('.about-hero-viewport .word');
+  if (!words.length) return;
+  const run = () => {
+    words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
 
 // Hero video: muted + play() for autoplay; gradient fallback on error or reduced motion
 (function initAboutHeroVideo() {
