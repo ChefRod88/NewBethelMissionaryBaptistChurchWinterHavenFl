@@ -30,11 +30,128 @@
 <div class="ev-white-lift">
 
   <div class="ev-content">
-    <div class="ev-tba">
-      <p class="ev-tba-label">Upcoming Events</p>
-      <h2 class="ev-tba-heading">To Be Announced.</h2>
-      <p class="ev-tba-body">We're planning something special. Check back soon for events,<br>gatherings, and ways to connect with our community.</p>
-    </div>
+    <section class="ev-beacon" aria-labelledby="bethelBeaconHeading">
+      <p class="ev-beacon-label">Bethel Beacon</p>
+
+      @if (Model.HasCurrentBeacon)
+      {
+        <div class="ev-beacon-intro">
+          <div>
+            <h2 id="bethelBeaconHeading" class="ev-beacon-heading">This Week&apos;s Bethel Beacon</h2>
+            <p class="ev-beacon-body">
+              Read the latest announcements, ministry updates, and weekly activities from New Bethel.
+              Tap any page to open a larger view that is easier to read on mobile devices.
+            </p>
+          </div>
+
+          <p class="ev-beacon-date">Current issue: @Model.CurrentBeacon!.DisplayDate</p>
+        </div>
+
+        <div class="ev-beacon-grid">
+          <article class="ev-beacon-card">
+            <button
+              type="button"
+              class="ev-beacon-preview"
+              data-beacon-open="front"
+              aria-label="Open the Bethel Beacon front page">
+              <img
+                class="ev-beacon-image"
+                src="@Model.CurrentBeacon.Front.Url"
+                alt="@Model.CurrentBeacon.Front.AltText"
+                loading="lazy" />
+            </button>
+
+            <div class="ev-beacon-card-body">
+              <div>
+                <p class="ev-beacon-card-label">Front page</p>
+                <h3 class="ev-beacon-card-title">Announcements and highlights</h3>
+              </div>
+
+              <div class="ev-beacon-actions">
+                <button type="button" class="ev-beacon-open" data-beacon-open="front">View full size</button>
+                <a href="@Model.CurrentBeacon.Front.Url" class="ev-beacon-link" target="_blank" rel="noopener noreferrer">Open original JPG</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="ev-beacon-card">
+            <button
+              type="button"
+              class="ev-beacon-preview"
+              data-beacon-open="back"
+              aria-label="Open the Bethel Beacon back page">
+              <img
+                class="ev-beacon-image"
+                src="@Model.CurrentBeacon.Back.Url"
+                alt="@Model.CurrentBeacon.Back.AltText"
+                loading="lazy" />
+            </button>
+
+            <div class="ev-beacon-card-body">
+              <div>
+                <p class="ev-beacon-card-label">Back page</p>
+                <h3 class="ev-beacon-card-title">Weekly schedule and community details</h3>
+              </div>
+
+              <div class="ev-beacon-actions">
+                <button type="button" class="ev-beacon-open" data-beacon-open="back">View full size</button>
+                <a href="@Model.CurrentBeacon.Back.Url" class="ev-beacon-link" target="_blank" rel="noopener noreferrer">Open original JPG</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div
+          id="bethelBeaconModal"
+          class="ev-beacon-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="bethelBeaconModalTitle"
+          hidden
+          data-front-src="@Model.CurrentBeacon.Front.Url"
+          data-front-alt="@Model.CurrentBeacon.Front.AltText"
+          data-back-src="@Model.CurrentBeacon.Back.Url"
+          data-back-alt="@Model.CurrentBeacon.Back.AltText"
+          data-issue-date="@Model.CurrentBeacon.DisplayDate">
+          <button type="button" class="ev-beacon-modal-overlay" data-beacon-close aria-label="Close the Bethel Beacon viewer"></button>
+
+          <div class="ev-beacon-modal-card">
+            <button type="button" class="ev-beacon-modal-close" data-beacon-close aria-label="Close the Bethel Beacon viewer">&times;</button>
+
+            <div class="ev-beacon-modal-header">
+              <p class="ev-beacon-modal-label">Bethel Beacon</p>
+              <h3 id="bethelBeaconModalTitle" class="ev-beacon-modal-title">Current issue</h3>
+              <p class="ev-beacon-modal-date">@Model.CurrentBeacon.DisplayDate</p>
+            </div>
+
+            <div class="ev-beacon-modal-body">
+              <button type="button" class="ev-beacon-modal-nav" data-beacon-nav="prev" aria-label="View the previous Bethel Beacon page">
+                <span aria-hidden="true">&larr;</span>
+              </button>
+
+              <div class="ev-beacon-modal-stage">
+                <p id="bethelBeaconModalPageLabel" class="ev-beacon-modal-page"></p>
+                <img id="bethelBeaconModalImage" class="ev-beacon-modal-image" src="" alt="" />
+              </div>
+
+              <button type="button" class="ev-beacon-modal-nav" data-beacon-nav="next" aria-label="View the next Bethel Beacon page">
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+      else
+      {
+        <div class="ev-beacon-empty">
+          <h2 id="bethelBeaconHeading" class="ev-beacon-heading">Bethel Beacon coming soon</h2>
+          <p class="ev-beacon-body">
+            Once the latest bulletin scans are uploaded, you&apos;ll be able to read the current Bethel Beacon
+            here on the Events page.
+          </p>
+        </div>
+      }
+    </section>
   </div>
 
   <!-- BIG CTA -->
