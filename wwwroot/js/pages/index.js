@@ -1,8 +1,18 @@
-// Hero word blur-in
-window.addEventListener('load', () => {
-  const words = document.querySelectorAll('.word');
-  words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
-});
+// Hero word blur-in — runs when the DOM is ready, not when the whole page finishes
+// (window "load" waits for the hero MP4 and all images, which blocked the animation on mobile).
+// Video/fonts keep loading in parallel in the background.
+(function () {
+  const words = document.querySelectorAll('.home-hero-viewport .hero-scripture .word');
+  if (!words.length) return;
+  const run = () => {
+    words.forEach((w, i) => setTimeout(() => w.classList.add('show'), 300 + i * 150));
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
 
 // Parallax hero background
 window.addEventListener('scroll', () => {
