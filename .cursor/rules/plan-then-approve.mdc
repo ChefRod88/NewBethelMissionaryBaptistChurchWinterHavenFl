@@ -1,0 +1,23 @@
+---
+description: When the user asks for a plan, show the plan only; implement after "apv"
+alwaysApply: true
+---
+
+# Plan first, `apv` to implement
+
+When the user’s **primary** request is to produce a **plan** (e.g. “plan”, “what’s the plan”, “how would you approach”, “give me a plan for…”, or they clearly want a reviewable outline before any code or file edits):
+
+1. **Reply with the plan only** — options, steps, files likely touched, tradeoffs, and risks. Be clear and reviewable.
+2. **Do not implement** — no file edits, no terminal commands that change the repo, no migrations or deploys — until the user approves.
+3. **Approval token:** When the user says **`apv`** (approved) in a follow-up, treat that as **go ahead and implement** the plan from this conversation (or the most recent plan they are referring to). Then carry out the work.
+
+**Notes**
+
+- If the user combines “plan and implement” in a single message without wanting a review stop, they can say that explicitly (e.g. “plan then build in one go”) — **otherwise** default to plan-only first when they asked for a plan.
+- **`apv`** is only a command in this **plan → review → implement** flow; do not treat the substring as approval in unrelated messages.
+
+**Examples**
+
+- User: “What’s the plan to add dark mode?” → **Plan only**; wait.
+- User: “apv” → **Implement** the dark mode plan.
+- User: “apv” and **`acp`** in the same message after a plan → implement, then add/commit/push per `git-shorthand` rule.

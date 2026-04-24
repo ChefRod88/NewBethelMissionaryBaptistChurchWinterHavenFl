@@ -2,6 +2,8 @@
 
 A production-oriented **ASP.NET Core** marketing and community site for a local church in Winter Haven, Florida. The codebase prioritizes a **static-first, configuration-driven** content model, a **coherent “Edify” visual system** (Judson + Outfit, pill navigation, card lifts), and **predictable GitHub → Azure** deployment for a **single** deployable project (`ChurchWebsite.csproj`).
 
+**Live site:** [https://newbethelwinterhaven.org/](https://newbethelwinterhaven.org/)
+
 **Status:** The public-facing **v1 site is complete** for launch—copy, photography and video blocks, leadership, giving, and footer credit are in place. Ongoing work is **operational** (content swaps, config in Azure, optional enhancements below), not a missing core.
 
 ---
@@ -10,6 +12,7 @@ A production-oriented **ASP.NET Core** marketing and community site for a local 
 
 | Area | Choice |
 |------|--------|
+| **Production URL** | [newbethelwinterhaven.org](https://newbethelwinterhaven.org/) |
 | **Runtime** | ASP.NET Core **9.0** (`net9.0`) |
 | **UI** | **Razor Pages** (no Blazor, no separate SPA) |
 | **Styling** | Per-page **scoped CSS** under `wwwroot/css/pages/`, global `site.css` / `site-mobile.css`, **Bootstrap 5** for baseline utilities |
