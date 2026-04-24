@@ -1,0 +1,19 @@
+---
+description: For user questions, lead with a short plan then the answer
+alwaysApply: true
+---
+
+# Questions: plan first, then answer
+
+When the user’s message is a **question** (they seek information, options, or an explanation—e.g. phrasing with **what / how / why / when / is there / can you**, or a sentence ending with **`?`**) or is **exploratory** before you act:
+
+1. **Start with a short Plan** — a few bullets or numbered steps: what you will cover, in what order, and any assumptions or tradeoffs. Keep it proportional (a sentence or two for simple questions; more for complex ones).
+2. **Then** deliver the main answer, guidance, or next steps.
+
+**Exceptions (no long plan):**
+
+- **Shorthand commands** the repo already defines (`acp`, `a`, `c`, `p`, or **`apv`**) as the *primary* instruction — a single line of intent is enough, then execute.
+- A **pure** “implement it now / just do it” with **no** question may skip a verbose plan; you may use one line of intent.
+- Replies that are only **acknowledging** a tiny follow-up in an ongoing “execute” thread may keep the plan to one line if redundant.
+
+**Coordination with `plan-then-approve`:** If they ask for a **plan** for a **code change** and want to **review before edits**, that rule still governs: **plan only** until they say **`apv`**. This rule adds the habit of a **visible plan section** in responses to **questions** even when the next step is only explanation, not implementation.

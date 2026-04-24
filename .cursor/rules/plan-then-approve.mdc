@@ -21,3 +21,5 @@ When the user’s **primary** request is to produce a **plan** (e.g. “plan”,
 - User: “What’s the plan to add dark mode?” → **Plan only**; wait.
 - User: “apv” → **Implement** the dark mode plan.
 - User: “apv” and **`acp`** in the same message after a plan → implement, then add/commit/push per `git-shorthand` rule.
+
+**With `answer-with-plan`:** For general **questions** (not only “plan my feature”), a short plan section still leads the reply; for **“give me a plan, then I’ll say apv”** workflows, the rules combine: show the plan (and for implementation, wait for **`apv`** as above).
