@@ -34,4 +34,10 @@ app.MapStaticAssets();                           // Serves wwwroot (css, js, ima
 app.MapRazorPages()                              // Maps /Index, /About, /Events/Index, etc.
    .WithStaticAssets();
 
+// Browsers and bots request /favicon.ico; serve the same image as the layout <link rel="icon">.
+var webRoot = app.Environment.WebRootPath ?? Path.Combine(app.Environment.ContentRootPath, "wwwroot");
+var faviconPath = Path.Combine(webRoot, "images", "IMG_7728.jpg");
+if (File.Exists(faviconPath))
+    app.MapGet("/favicon.ico", () => Results.File(faviconPath, "image/jpeg"));
+
 app.Run();
